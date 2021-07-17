@@ -29,4 +29,4 @@ B. Receiver device
 3. Then, parent received a sound and also LED lighting from the dining table. The speaker will buzzing evry few seconds.
 4. To stop the buzzing, parent need put aside the work on hand and move the sight line into the receiver device, the receiver device will calcaute the image three times then stop the buzzing. At that time, parent could focus on what the kid what's the talk about.
 
-# Have Fun and Enjoy
+# Have fun and hope you can enjoy :)
