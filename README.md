@@ -8,8 +8,8 @@
 
 Due to COVID-19 situation, a lot of families shift to working from home and long distance learning. Working parents and kids share the same space for working and studying. 
 For parents, it's good to take care that your kids belong with you but sometimes that's very challenging for me to switch work and family mode in the house. <br /><br />
-Thanks to the high internet bandwidth at home, you can actually do all of your work at home with people around the world. <br /> 
-That means you could sit on your dining table and watch your computer from 7am morning until 9pm for one and one conf. calls without looking and talking with your family. :sob: <br /> <br />
+Thanks to the high internet bandwidth at home, you can actually do all of your work at home with people in different time zone. <br /> 
+That means you could sit on your dining table and watch your computer from 7am morning until 9pm for one and one virtual meeting without looking and talking with your family. :sob: <br /> <br />
 Because of that, I'd like to create an interesting interactivity program with kids so that when they need to talk with parents then they can swipe or speak a keyword to some tiny machine to give parents heads up.<br /><br />
 
 Check this video about the details. <br />
