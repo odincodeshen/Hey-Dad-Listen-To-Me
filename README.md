@@ -4,6 +4,7 @@
 ### Table of Contents  <br /> <br />
 
 
+
 ## Motivation, It's all about the family connection :family:
 
 Due to COVID-19 situation, a lot of families shift to working from home and long distance learning. Working parents and kids share the same space for working and studying. 
@@ -69,23 +70,23 @@ Check this video --> https://www.youtube.com/embed/95lYoM273S4  <br />
 <br />
 <br />
 
-## Motion Training
+## Machine Learning Training
+### Gesture define:
 When I bring this idea to discuss with the kid, we decide two gestures, time-out and roll.
 <br />
-### Time out 
+#### Time out 
 <a href="https://www.youtube.com/embed/aCJEFmkYoiE
 " target="_blank"><img src="/photos/time_out_gesture.PNG" 
 alt="Time-out Gesture Example" width="480" height="480" border="10" /></a>
 <br />
 
-### Roll
+#### Roll
 <a href="https://www.youtube.com/embed/iG2-kHf2zCA
 " target="_blank"><img src="/photos/roll_gesture.PNG" 
 alt="Roll Gesture Example" width="480" height="480" border="10" /></a>
 <br />
 
-### Machine Learning Training
-#### Gesture Training:
+### Gesture Training:
 Kids and I follow up this Tiny Motion Trainer (https://experiments.withgoogle.com/tiny-motion-trainer) to create two gestures. <br />
 Collect 50 samples for "Time-Out" <br />
 <img src="/photos/motion_training4.PNG" width="1000px" />   
@@ -107,18 +108,116 @@ Verified the trained model, it looks pretty good on my try. :blush: <br />
 Finally, download the example code into my local machine to add a communication function.
 <br /><br /><br />
 
-#### Person Detection Training:
+### Person Detection Training:
 Original tflite-micro is work well on Arduino Cortex-M4, so I apply the same int8 model into Pico. The result work well. <br />
 https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/examples/person_detection
-<img src="/photos/Person_Detection.PNG" width="800px" /> 
+<img src="/photos/Person_Detection.JPG" width="800px" /> 
 
+Now, we can start the device deploy. <br /><br />
 
-## Communication Code Behavior 
+## Device Implementation
+
+Basic on our project spec, there are three of parts need implement. <br /><br />
+* arduino gesture detection.
+* Pi PICO person detection.
+* micro:bit communication and interactive hardware control.
+
+<br />
+Let's start from arduino. <br />
+
+### arduino gesture detection
+tiny-motion-trainer has already provided arduino code for download, you can based on the example to design for your project.
+https://experiments.withgoogle.com/tiny-motion-trainer
+
+[Source Here](./TinyMotion-timeput-roll--v2/DaddyHeadsUp/DaddyHeadsUp.ino)
+```c
+...
+  while (isCapturing) {
+    ...
+    IMU.readAcceleration(aX, aY, aZ);
+    IMU.readGyroscope(gX, gY, gZ);
+
+    // Normalize the IMU data between -1 to 1 and store in the model's
+    // input tensor. Accelerometer data ranges between -4 and 4,
+    // gyroscope data ranges between -2000 and 2000
+    tflInputTensor->data.f[numSamplesRead * 6 + 0] = aX / 4.0;
+    tflInputTensor->data.f[numSamplesRead * 6 + 1] = aY / 4.0;
+    tflInputTensor->data.f[numSamplesRead * 6 + 2] = aZ / 4.0;
+    tflInputTensor->data.f[numSamplesRead * 6 + 3] = gX / 2000.0;
+    tflInputTensor->data.f[numSamplesRead * 6 + 4] = gY / 2000.0;
+    tflInputTensor->data.f[numSamplesRead * 6 + 5] = gZ / 2000.0;
+
+    if (numSamplesRead == NUM_SAMPLES) {
+
+      // Run inference
+      TfLiteStatus invokeStatus = tflInterpreter->Invoke();       
+      ...
+      for (int i = 0; i < NUM_GESTURES; i++) {
+        float _value = tflOutputTensor->data.f[i];
+        if(_value > maxValue){
+          maxValue = _value;
+          maxIndex = i;
+        }
+      }
+      Serial.print("Winner: ");
+      Serial.print(GESTURES[maxIndex]);
+      
+      // GPIO pull-up to trigger micro:bit when maxValue over threshold 
+
+    }
+  }
+...
+```
+
+### Pi PICO person detection.
+I follow original arducam guideline to build up my project, mainly on main_functions.cpp.<br />
+https://www.arducam.com/raspberry-pi-pico-tensorflow-lite-micro-person-detection-arducam/#person-detection-diagram
+
+[Source Here](./rpi_pico/parent_headsup/main_functions.cpp)
+```c
+#include "main_functions.h"
+#include <LCD_st7735.h>
+#include <hardware/gpio.h>
+#include <hardware/irq.h>
+#include <hardware/uart.h>
+#include <pico/stdio_usb.h>
+
+#include "detection_responder.h"
+#include "image_provider.h"
+#include "model_settings.h"
+#include "person_detect_model_data.h"
+#include "tensorflow/lite/micro/micro_error_reporter.h"
+#include "tensorflow/lite/micro/micro_interpreter.h"
+#include "tensorflow/lite/micro/micro_mutable_op_resolver.h"
+#include "tensorflow/lite/schema/schema_generated.h"
+#include "tensorflow/lite/version.h"
+
+...
+void loop() {
+  ...
+  if (kTfLiteOk != interpreter->Invoke()) {   
+    TF_LITE_REPORT_ERROR(error_reporter, "Invoke failed.");
+  }
+  TfLiteTensor *output = interpreter->output(0);
+  ...
+  // Process the inference results.
+  int8_t person_score    = output->data.uint8[kPersonIndex];
+  int8_t no_person_score = output->data.uint8[kNotAPersonIndex];
+  RespondToDetection(error_reporter, person_score, no_person_score);
+  
+  // GPIO pull-up to trigger micro:bit
+}
+
+```
+
+### Communication Code Behavior 
 Kid and I work this part as well. <br />
 We use several hardware extension module to create light and sound to get partner's attention.<br /><br />
 
-### ListenMe_Commander
+#### ListenMe_Commander
+
 microbit-ListenMe_Commander_1 <br />
+[Source Here](./microbit/microbit-ListenMe_Commander_1.hex)
 ```python
 def on_button_pressed_ab():
     radio.send_number(trigger)
@@ -148,8 +247,9 @@ def on_forever():
 basic.forever(on_forever)
 
 ```
-### ListenMe_Receiver
+#### ListenMe_Receiver
 microbit-ListenMe_Receiver_1 <br />
+[Source Here](./microbit/microbit-ListenMe_Receiver_1.hex)
 ```python
 def on_received_number(receivedNumber):
     global ack_cont, display, command
@@ -231,6 +331,9 @@ def on_forever():
     basic.pause(1000)
 basic.forever(on_forever)
 ```
+
+All set.
+After download the code and plug the USB cable, you can have fun with your kid at home now. :heart_eyes:
 
 
 
