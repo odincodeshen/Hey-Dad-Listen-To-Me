@@ -10,7 +10,14 @@ Due to COVID-19 situation, lot of family shift to working from home and long dis
 For parents, it's good to take care you kids belong with you but some of time that's very challenge for me to switch work mode and family mode in the house. <br /><br />
 Thanks for the high internet bandwidth at home, you can actually did all of your work at home with people around the world. <br /> 
 That's mean you could be possible to sit on your dining table yo watch you computer from 7am morning until 9pm for one and one conf. calls without look and talk with your family. :sob: <br /> <br />
-Because that, I'd like to create an interest interactivity program with kid then when they need to talk with parents then they can swipe or speech a key word to some of tiny machine to give parents heads up.<br /><br /><br />
+Because that, I'd like to create an interest interactivity program with kid then when they need to talk with parents then they can swipe or speech a key word to some of tiny machine to give parents heads up.<br /><br />
+
+Watch this video about the detail. <br />
+<a href="https://www.youtube.com/embed/95lYoM273S4
+" target="_blank"><img src="/photos/HeyDad_ListenToMe.PNG" 
+alt="Youtube Video" width="560" height="315" border="10" /></a>
+<br />
+<br />
 
 ## Project source
 This project based on some of open-source project from Tiny Motion Trainer (https://experiments.withgoogle.com/tiny-motion-trainer), TensorFlow Lite for Microcontrollers (https://www.tensorflow.org/lite/microcontrollers) and Raspberry Pi Pico SDK (https://github.com/raspberrypi/pico-sdk).
