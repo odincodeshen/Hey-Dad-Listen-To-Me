@@ -6,13 +6,14 @@
 
 ## Motivation, It's all about the family connection :family:
 
-Due to COVID-19 situation, lot of family shift to working from home and long distance learning, parents and kids share the same space for working and studing. 
-For parents, it's good to take care you kids belong with you but some of time that's very challenge for me to switch work mode and family mode in the house. <br /><br />
-Thanks for the high internet bandwidth at home, you can actually did all of your work at home with people around the world. <br /> 
-That's mean you could be possible to sit on your dining table yo watch you computer from 7am morning until 9pm for one and one conf. calls without look and talk with your family. :sob: <br /> <br />
-Because that, I'd like to create an interest interactivity program with kid then when they need to talk with parents then they can swipe or speech a key word to some of tiny machine to give parents heads up.<br /><br />
+Due to COVID-19 situation, a lot of families shift to working from home and long distance learning. Working parents and kids share the same space for working and studying. 
+For parents, it's good to take care that your kids belong with you but sometimes that's very challenging for me to switch work and family mode in the house. <br /><br />
+Thanks to the high internet bandwidth at home, you can actually do all of your work at home with people around the world. <br /> 
+That means you could sit on your dining table and watch your computer from 7am morning until 9pm for one and one conf. calls without looking and talking with your family. :sob: <br /> <br />
+Because of that, I'd like to create an interesting interactivity program with kids so that when they need to talk with parents then they can swipe or speak a keyword to some tiny machine to give parents heads up.<br /><br />
 
-Watch this video about the detail. <br />
+Check this video about the details. <br />
+
 <a href="https://www.youtube.com/embed/95lYoM273S4
 " target="_blank"><img src="/photos/HeyDad_ListenToMe.PNG" 
 alt="Youtube Video"/></a>
@@ -28,14 +29,14 @@ This project majorly based on three of open-source projects: <br />
 
 ## Hardware Board:
 1. arduino nano 33 *2:<br />
-      Use TFLu to detection gesture and key-word.
+      Use TFLu to detect gestures and speech keyword.
 		 
 2. micro:bit v2 *2<br />
-      Communicate between commander and receiver. micro:bit provide a lot of funny multimedia widget like funny voice tone, led light strips and digital LED, so increase kid's interesting.
+      Communicate between commander and receiver. micro:bit provides a lot of funny multimedia widget like funny voice tone, led light strips and digital LED, so increase kid's interest.
 		
 3. Raspberry Pi Pico Ardicam *1 <br />
       (https://www.arducam.com/raspberry-pi-pico-tensorflow-lite-micro-person-detection-arducam/)
-      Use TFLu to person detection. (https://github.com/odincodeshen/tflite-micro/tree/main/tensorflow/lite/micro/examples/person_detection)
+      Use TFLu to implement person detection. (https://github.com/odincodeshen/tflite-micro/tree/main/tensorflow/lite/micro/examples/person_detection)
       Arduino nano doesn't support camera, so I use one of Pi PICO module from arducam. <br />
 
 4. micro:bit hardware extension from Seees x Grove <br />
@@ -47,11 +48,11 @@ They are two devices: <br />
 A. Commander device <br />
 B. Receiver device <br />
 
-1. When kid want parents listen to him/her, kid will swipe commander device or speech a key word to the commander device.
-2. Once device recognize the gesture or keywork, commander will send out command to Receiver device.
-3. Then, parent received a sound and also LED lighting from the dining table. The speaker will buzzing evry few seconds.
-4. To stop the buzzing, parent need put aside the work on hand and move the sight line into the receiver device. <br />
-5. The receiver device will calcaute the image three times then stop the buzzing. At that time, parent could focus on what the kid what's the talk about.
+1. When a kid wants parents to listen to him/her, the kid will swipe the commander device or speech a key word to the commander device.
+2. Once the device recognizes the gesture or keyword, the commander device will send out command to the Receiver device.
+3. Then, parent received a sound and also LED lighting from the dining table. The speaker will buzz every few seconds.
+4. To stop the buzzing, parents need to put aside the work on hand and move the sight line into the receiver device. <br />
+5. The receiver device will calculate the image three times then stop the buzzing. At that time, parents could focus on what the kid what's the talk about.
 <br /><br /><br />
 
 ## Have fun and hope you can enjoy :blush:
@@ -60,7 +61,7 @@ B. Receiver device <br />
 <br />
 
 ## Motion Training
-When I bring this idea to discuss with kid, we decide two of gestures, time-out and roll.
+When I bring this idea to discuss with the kid, we decide two gestures, time-out and roll.
 <br />
 ### Time out 
 <a href="https://www.youtube.com/embed/aCJEFmkYoiE
@@ -75,7 +76,7 @@ alt="Roll Gesture Example" width="480" height="480" border="10" /></a>
 <br />
 
 ### Machine Learning Training
-Then, we follow up this Tiny Motion Trainer (https://experiments.withgoogle.com/tiny-motion-trainer) to create two of gestures. <br />
+Then, we follow up this Tiny Motion Trainer (https://experiments.withgoogle.com/tiny-motion-trainer) to create two gestures. <br />
 Collect 50 samples for "Time-Out" <br />
 <img src="/photos/motion_training4.PNG" width="1000px" />   
 <br />
@@ -88,15 +89,15 @@ Start the training on Google Cloud. <br />
 <img src="/photos/motion_training5.PNG" width="1000px" />   
 <br />
 
-Verified the trained model, looks pretty well on my try. :blush: <br />
+Verified the trained model, it looks pretty good on my try. :blush: <br />
 <img src="/photos/motion_training1.PNG" width="800px" />   
 <img src="/photos/motion_training2.PNG" width="800px" />   
 <br />
 
-Finally, download the example code into my local machine to add communication function.
+Finally, download the example code into my local machine to add a communication function.
 <br /><br /><br />
 
-## Commuciation Code Behavior 
+## Communication Code Behavior 
 Kid and I work this part as well. <br />
 We use several hardware extension module to create light and sound to get partner's attention.<br /><br />
 
