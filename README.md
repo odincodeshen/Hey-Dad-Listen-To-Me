@@ -1,6 +1,9 @@
 
 # Hey Dad, Learn To Me !
 
+## Table of Contents  
+
+
 Due to COVID-19 situation, lot of family shift to working from home and long distance learning, parents and kids share the same space for working and studing. 
 For parents, it's good to take care you kids belong with you but some of time that's very challenge for me to switch work mode and family mode in the house. <br /><br />
 Thanks for the high internet bandwidth at home, you can actually did all of your work at home with people around the world. <br /> 
