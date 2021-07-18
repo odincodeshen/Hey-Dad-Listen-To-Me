@@ -15,7 +15,7 @@ Because that, I'd like to create an interest interactivity program with kid then
 Watch this video about the detail. <br />
 <a href="https://www.youtube.com/embed/95lYoM273S4
 " target="_blank"><img src="/photos/HeyDad_ListenToMe.PNG" 
-alt="Youtube Video" width="560" height="315" border="10" /></a>
+alt="Youtube Video"/></a>
 <br />
 <br />
 
