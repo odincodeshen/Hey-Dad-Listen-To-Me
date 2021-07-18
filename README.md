@@ -80,5 +80,122 @@ Verified the trained model, looks pretty well on my try. :blush: <br />
 Finally, download the example code into my local machine to add communication function.
 
 
+## Commuciation Code Behavior 
+Kid and I work this part as well. <br />
+We use several hardware extension module to create light and sound to get partner's attention.<br /><br />
+
+### Command_1
+```python
+def on_button_pressed_ab():
+    radio.send_number(trigger)
+input.on_button_pressed(Button.AB, on_button_pressed_ab)
+
+trigger = 0
+radio.set_group(88)
+trigger = 8
+basic.show_string("COMMANDER ")
+
+def on_forever():
+    if pins.digital_read_pin(DigitalPin.P2) == 1:
+        radio.send_number(trigger)
+        basic.show_icon(IconNames.SMALL_HEART)
+        soundExpression.giggle.play_until_done()
+    elif pins.digital_read_pin(DigitalPin.P1) == 1:
+        soundExpression.happy.play_until_done()
+        basic.show_icon(IconNames.HEART)
+    else:
+        basic.show_leds("""
+            . . . . .
+                        . . . . .
+                        . . # . .
+                        . . . . .
+                        . . . . .
+        """)
+basic.forever(on_forever)
+
+```
+### Receiver_1
+```python
+def on_received_number(receivedNumber):
+    global ack_cont, display, command
+    if receivedNumber != command and receivedNumber == trigger:
+        strip.show_rainbow(1, 300)
+        ack_cont = 0
+        display = 60
+        command = trigger
+        basic.pause(100)
+    basic.show_number(command)
+radio.on_received_number(on_received_number)
+
+def on_button_pressed_a():
+    global status
+    if status == 0:
+        soundExpression.happy.play()
+        status = 1
+    else:
+        status = 0
+        strip.show_rainbow(1, 360)
+input.on_button_pressed(Button.A, on_button_pressed_a)
+
+def on_button_pressed_ab():
+    global command
+    command = acked
+input.on_button_pressed(Button.AB, on_button_pressed_ab)
+
+def on_button_pressed_b():
+    global ack_cont, display, command
+    strip.show_rainbow(1, 300)
+    ack_cont = 0
+    display = 60
+    command = trigger
+    basic.pause(100)
+input.on_button_pressed(Button.B, on_button_pressed_b)
+
+status = 0
+display = 0
+ack_cont = 0
+acked = 0
+trigger = 0
+command = 0
+strip: neopixel.Strip = None
+strip = neopixel.create(DigitalPin.P0, 30, NeoPixelMode.RGB)
+_4digit = grove.create_display(DigitalPin.P1, DigitalPin.P15)
+strip.show_rainbow(1, 360)
+radio.set_group(88)
+command = 0
+trigger = 8
+acked = 9
+
+def on_forever():
+    global display, ack_cont, command
+    if command == trigger:
+        basic.show_icon(IconNames.SAD)
+        _4digit.show(display)
+        music.play_tone(262, music.beat(BeatFraction.QUARTER))
+        music.play_tone(262, music.beat(BeatFraction.QUARTER))
+        display = display - 1
+        strip.show_color(neopixel.colors(NeoPixelColors.RED))
+        if pins.digital_read_pin(DigitalPin.P2) == 1:
+            ack_cont = ack_cont + 1
+            music.play_tone(523, music.beat(BeatFraction.QUARTER))
+        if ack_cont >= 3:
+            command = acked
+        else:
+            if ack_cont / 2 == 0:
+                basic.show_icon(IconNames.TARGET)
+            else:
+                basic.show_icon(IconNames.SMALL_DIAMOND)
+    elif command == acked:
+        soundExpression.happy.play()
+        strip.show_rainbow(1, 360)
+        basic.show_icon(IconNames.HAPPY)
+        command = 0
+        _4digit.show(0)
+    else:
+        strip.rotate(1)
+    basic.pause(1000)
+basic.forever(on_forever)
+```
+
 
 
