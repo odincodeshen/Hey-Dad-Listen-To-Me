@@ -48,11 +48,11 @@ They are two devices: <br />
 A. Commander device <br />
 B. Receiver device <br />
 
-1. When a kid wants parents to listen to him/her, the kid will swipe the commander device or speech a key word to the commander device.
-2. Once the device recognizes the gesture or keyword, the commander device will send out command to the Receiver device.
-3. Then, parent received a sound and also LED lighting from the dining table. The speaker will buzz every few seconds.
-4. To stop the buzzing, parents need to put aside the work on hand and move the sight line into the receiver device. <br />
-5. The receiver device will calculate the image three times then stop the buzzing. At that time, parents could focus on what the kid what's the talk about.
+1. When a kid wants parents to listen to them, they will swipe the commander device or speech a key-word to the commander device.
+2. Once the device recognizes the gesture or keyword, the commander device will send out a command to the Receiver device.
+3. Then, the parent received a sound and also LED lighting from the dining table. The speaker will buzz every few seconds.
+4. To stop the buzzing, parents need to put aside the work on hand and move the sightline into the receiver device. 
+5. The receiver device will calculate the image three times then stop the buzzing. At that time, parents could focus on what the kid what's them talk about.
 <br /><br /><br />
 
 ## Have fun and hope you can enjoy :blush:
