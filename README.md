@@ -28,35 +28,44 @@ This project majorly based on three of open-source projects: <br />
 <br /><br /><br />
 
 ## Hardware Board:
-1. arduino nano 33 *2:<br />
-      Use TFLu to detect gestures and speech keyword.
-		 
+1. arduino nano BLE 33 *2:<br />
+   * https://store.arduino.cc/usa/nano-33-ble <br />
+   * 32-bit ARM® Cortex™-M4 CPU running at 64 MHz, 1MB of program memory. 
+   * This CPU should be good enough for TensorFlow Lite for Microcontrollers to detect gestures and speech keyword.
+
 2. micro:bit v2 *2<br />
-      Communicate between commander and receiver. micro:bit provides a lot of funny multimedia widget like funny voice tone, led light strips and digital LED, so increase kid's interest.
+   * In the beginning, I plan to use arduino bluetooth low energy (LBE) as the communication protocol. But we need extra work to figure out computer or smartphone APP to control the communication, that's difficult to explain with a 9-year-old kid.<br />
+   * I'm thinking to use most easy hardware as the primary communication board, so I decided to use micro:bit v2 (https://microbit.org/new-microbit/). Kids can easily add lighting and sound anything they want on scratch. (https://makecode.microbit.org/)
+   * Finally, I use a radio signal to communicate between commander and receiver. on micro:bit also provides a lot of funny multimedia extension board like funny voice speaker, led light strips, and servo motor for kids to bring their creativity.<br />
 		
 3. Raspberry Pi Pico Ardicam *1 <br />
-      (https://www.arducam.com/raspberry-pi-pico-tensorflow-lite-micro-person-detection-arducam/)
-      Use TFLu to implement person detection. (https://github.com/odincodeshen/tflite-micro/tree/main/tensorflow/lite/micro/examples/person_detection)
-      Arduino nano doesn't support camera, so I use one of Pi PICO module from arducam. <br />
+   * Dual-core Arm Cortex-M0+ processor, 133 MHz, 264KB on-chip SRAM, 2MB on-board Flash. https://www.raspberrypi.org/products/raspberry-pi-pico/specifications/
+   * CPU without DSP support and SRAM smaller then arduino nano BLE 33. 
+   * I got one of Arducam Pico4ML with Raspberry Pi RP2040 processor which embedded QVGA camera so I don't need additional camera. https://www.arducam.com/product/rp2040-based-arducam-pico4ml-dev-board-for-machine-vision/
+   * Re-use tflite-micro person detection example to build up my project. (https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/examples/person_detection)
 
-4. micro:bit hardware extension from Seees x Grove <br />
-      https://www.seeedstudio.com/Grove-Inventor-Kit-for-micro-bit-p-2891.html
+4. micro:bit hardware extension from Seees x Grove (option, you can use any other hardware instead.) <br />
+   * https://www.seeedstudio.com/Grove-Inventor-Kit-for-micro-bit-p-2891.html
 <br /><br />
 
 ## How to Play:
 They are two devices: <br />
 A. Commander device <br />
 B. Receiver device <br />
+<img src="/photos/commander_device.PNG" width="400px" /> <img src="/photos/receiver_device.PNG" width="400px" />
 
-1. When a kid wants parents to listen to them, they will swipe the commander device or speech a key-word to the commander device.
-2. Once the device recognizes the gesture or keyword, the commander device will send out a command to the Receiver device.
-3. Then, the parent received a sound and also LED lighting from the dining table. The speaker will buzz every few seconds.
-4. To stop the buzzing, parents need to put aside the work on hand and move the sightline into the receiver device. 
+<br /><br />
+
+1. When a kid wants parents to listen to them, they will swipe the commander device or speech a key-word to the commander device. <br />
+2. Once the device recognizes the gesture or keyword, the commander device will send out a command to the Receiver device. <br />
+3. Then, the parent received a sound and also LED lighting from the dining table. The speaker will buzz every few seconds. <br />
+4. To stop the buzzing, parents need to put aside the work on hand and move the sightline into the receiver device. <br />
 5. The receiver device will calculate the image three times then stop the buzzing. At that time, parents could focus on what the kid what's them talk about.
 <br /><br /><br />
 
 ## Have fun and hope you can enjoy :blush:
 <br />
+Check this video --> https://www.youtube.com/embed/95lYoM273S4  <br />
 <br />
 <br />
 
@@ -76,7 +85,8 @@ alt="Roll Gesture Example" width="480" height="480" border="10" /></a>
 <br />
 
 ### Machine Learning Training
-Then, we follow up this Tiny Motion Trainer (https://experiments.withgoogle.com/tiny-motion-trainer) to create two gestures. <br />
+#### Gesture Training:
+Kids and I follow up this Tiny Motion Trainer (https://experiments.withgoogle.com/tiny-motion-trainer) to create two gestures. <br />
 Collect 50 samples for "Time-Out" <br />
 <img src="/photos/motion_training4.PNG" width="1000px" />   
 <br />
@@ -96,6 +106,12 @@ Verified the trained model, it looks pretty good on my try. :blush: <br />
 
 Finally, download the example code into my local machine to add a communication function.
 <br /><br /><br />
+
+#### Person Detection Training:
+Original tflite-micro is work well on Arduino Cortex-M4, so I apply the same int8 model into Pico. The result work well. <br />
+https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/examples/person_detection
+<img src="/photos/Person_Detection.PNG" width="800px" /> 
+
 
 ## Communication Code Behavior 
 Kid and I work this part as well. <br />
