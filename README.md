@@ -20,7 +20,10 @@ alt="Youtube Video"/></a>
 <br />
 
 ## Project source
-This project based on some of open-source project from Tiny Motion Trainer (https://experiments.withgoogle.com/tiny-motion-trainer), TensorFlow Lite for Microcontrollers (https://www.tensorflow.org/lite/microcontrollers) and Raspberry Pi Pico SDK (https://github.com/raspberrypi/pico-sdk).
+This project majorly based on three of open-source projects: <br />
+1. TensorFlow Lite for Microcontrollers (https://www.tensorflow.org/lite/microcontrollers)
+2. Tiny Motion Trainer (https://experiments.withgoogle.com/tiny-motion-trainer) and 
+3. Raspberry Pi Pico SDK (https://github.com/raspberrypi/pico-sdk).
 <br /><br /><br />
 
 ## Hardware Board:
